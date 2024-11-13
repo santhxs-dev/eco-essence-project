@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.main-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.main-center > h1 {
+    font-size: 45px;
+    width: 70%;
+    color: #1e3a57;
+}
+
+.main-center > button {
+    margin-top: 35px;
+    border: none;
+    padding: 20px 40px;
+    color: whitesmoke;
+    background-color: #2c3e50;
+    font-size: 20px;
+    transition: all 0.1s ease;
+}
+
+.main-center > button:hover {
+    opacity: 0.7;
+    transition: all 0.1s ease;
+}
+
+/* Grid de produtos */
+
+.best-seller {
+    margin-top: 50px;
+}
+
+.best-seller h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #2c3e50;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    cursor: pointer;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.507);
+    text-align: center;
+    transition: all 0.15s ease; 
+}
+
+.product:hover {
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.507);   
+    transition: all 0.15s ease; 
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product > .price {
+    margin: 5px 0;
+    font-size: 20px;
+    color: #666;
+}
+
+/* Horizontal Rule*/
+
+hr {
+    height: 2px;
+    border: none;
+    border-radius: 2px;
+    background-color: #09273b;
+    width: 75%;
+    margin: auto;
+}
+
+/* Marcas */
+
+.marks {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.marks > h1 {
+    margin: 20px;
+}
+
+.marks-items > img {
+    margin: 15px 30px;
+}
+
+/* About */
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #f9f9f9; /* Cor de fundo suave */
+    border-radius: 8px;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.5);
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 70px;
+    transition: all 0.5s ease;
+}
+
+.about:hover {
+    box-shadow: 2px 4px 24px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+}
+
+.about-left img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-right {
+    margin-left: 2rem;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    max-width: 600px;
+}
+
+.about-right p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.about-right p:first-child {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #222; /* Destaque para o primeiro parágrafo */
+}
+
+.about-right p:last-child {
+    font-style: italic;
+    color: #666;
+}
+
+/* Benefícios */
+
+.benefices {
+    background-color: #f2f2f2; /* Fundo suave */
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 2rem auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.benefices h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.benefices-item {
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.benefices-item h3 {
+    color: #0073e6; /* Cor de destaque para o título */
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.benefices-item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.benefices-item:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Media section */
+@media (max-width: 768px) {
+    .main-center > h1 {
+        font-size: 30px;
+    }
+
+    .items {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .about {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .about-left,
+    .about-right {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .about-left img {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .benefices {
+        padding: 1rem;
+    }
+
+    .benefices-item {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Página do erro */
+
+.error {
+    margin-top: 30px;
+}

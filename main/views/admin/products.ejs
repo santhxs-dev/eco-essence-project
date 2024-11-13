@@ -1,0 +1,33 @@
+<%- include('../includes/body') %>
+
+    <%- include('../includes/nav') %>
+
+        <div class="products">
+            <%if (products.length> 0) { %>
+                <h1>Produtos para inspecionar:</h1>
+                <div class="items">
+                    <% products.forEach(product=> { %>
+                        <div class="product">
+                            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                            <h3>
+                                <%= product.title %>
+                            </h3>
+                            <h4 class="price">R$ <%= product.price %>
+                            </h4>
+                            <h4 class="desc">- <%= product.description %>
+                            </h4>
+                            <div class="actions">
+                                <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn">Editar</a>
+                                <form action="/admin/delete-product" method="POST">
+                                    <input type="hidden" value="<%= product._id %>" name="productId">
+                                    <button class="btn" type="submit">Deletar</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <% }) %>
+                </div>
+                <% } else { %>
+                    <h1>Sem produtos...</h1>
+                    <% } %>
+        </div>

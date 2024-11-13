@@ -1,0 +1,21 @@
+<%- include('../includes/body') %>
+
+<%- include('../includes/nav') %>
+
+<!-- fazer statment do if editing -->
+<form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
+    <h2>Preencha os campos<% if (editing) { %> para editar<% } %>:</h2>
+    <label for="title">Título</label>
+    <input type="text" name="title" id="title" required value="<% if (editing) { %><%= product.title %><% } %>">
+    <label for="imageUrl">URL da Imagem</label>
+    <input type="text" name="imageUrl" id="imageUrl" required value="<% if (editing) { %><%= product.imageUrl %><% } %>">
+    <label for="price">Preço</label>
+    <input type="number" name="price" id="price" step="0.01" required value="<% if (editing) { %><%= product.price %><% } %>">
+    <label for="description">Descrição</label>
+    <textarea name="description" id="description" rows="5"><% if (editing) { %><%= product.description %><% } %></textarea>
+
+    <% if (editing) { %>
+        <input type="hidden" value="<%= product._id %>" name="productId">
+    <% } %>
+    <button type="submit"><% if (editing) { %> Editar Produto <% } else { %> Adicionar Produto <% } %></button>
+</form>

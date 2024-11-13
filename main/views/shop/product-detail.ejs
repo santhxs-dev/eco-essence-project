@@ -1,0 +1,17 @@
+<%- include('../includes/body') %>
+
+<%- include('../includes/nav') %>
+
+<div class="product">
+    <h2><%= product.title %></h2>
+    <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+    <h1 class="price">R$ <%= product.price %></h1>
+    <h2>- <%= product.description %></h2>
+    
+    <form action="/cart" method="post">
+        <button class="btn" type="submit">Adicionar ao carrinho</button>
+        <input type="hidden" name="productId" value="<%= product._id %>">
+    </form>
+</div>
+
+<%- include('../includes/end') %>

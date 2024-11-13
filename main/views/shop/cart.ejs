@@ -1,0 +1,34 @@
+<%- include('../includes/body') %>
+
+<%- include('../includes/nav') %>
+
+<main class="cart">
+    <% if (products.length > 0) { %>
+        <h1 class="title">Seu carrinho:</h1>
+        <ul class="ul">
+            <% products.forEach(p => { %>
+                <li class="li">
+                    <div>
+                        <h1>- <%= p.productId.title %></h1>
+                        <h2>Quantidade: <%= p.quantity %></h2>
+                    </div>
+                    <form action="/cart-delete" method="POST">
+                        <input type="hidden" value="<%= p.productId._id %>" name="productId">
+                        <button type="submit">Deletar</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+        <div class="order">
+            <form action="/create-order" method="POST">
+                <button type="submit" class="btn">Fazer o pedido agora!</button>
+            </form>
+        </div>
+        
+    <% } else { %>
+        <h1 class="noProds">Sem produtos no carrinho!</h1>
+    <% } %>
+</main>
+
+
+<%- include('../includes/end') %>

@@ -1,0 +1,22 @@
+<%- include('../includes/body') %>
+
+<%- include('../includes/nav') %>
+        <main>
+            <% if (orders.length <= 0) { %>
+                <h1>Sem pedidos!</h1>
+            <% } else { %>
+                <ul class="orders">
+                    <% orders.forEach(order => { %>
+                        <li>
+                            <h1>Order - # <%= order._id %></h1>
+                            <ul>
+                                <% order.products.forEach(p => { %>
+                                    <li><%= p.product.title %> (<%= p.quantity %>)</li>
+                                <% }); %>
+                            </ul>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </main>
+<%- include('../includes/end') %>

@@ -1,0 +1,45 @@
+.orders {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.orders li {
+    background: #f8f9fa;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.orders h1 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.orders ul {
+    padding-left: 1rem;
+    list-style: none;
+}
+
+.orders ul li {
+    font-size: 1rem;
+    color: #555;
+    padding: 0.5rem 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.orders ul li:last-child {
+    border-bottom: none;
+}
+
+.orders li:hover {
+    background-color: #e9ecef;
+}
+
+li {
+    margin-left: 10px;
+}

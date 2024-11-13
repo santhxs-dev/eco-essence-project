@@ -1,0 +1,23 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "description": "A project for e-Commerce WebSite using Express.js, Sequelize and more!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Test command\"",
+    "start": "nodemon app.js",
+    "start-server": "node app.js",
+    "ngrok": "ngrok http 3000"
+  },
+  "author": "Renki Dev",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0"
+  }
+}
