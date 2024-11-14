@@ -2,7 +2,6 @@
 
 <%- include('../includes/nav') %>
 
-<!-- fazer statment do if editing -->
 <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
     <h2>Preencha os campos<% if (editing) { %> para editar<% } %>:</h2>
     <label for="title">Título</label>

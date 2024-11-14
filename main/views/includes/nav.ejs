@@ -1,20 +1,26 @@
 <nav>
     <div class="left">
         <a href="/">Início</a>
-        <a href="/shop">Loja</a>
         <a href="/about">Sobre</a>
         <a href="/contact">Contato</a>
+        <% if (isAuthenticated) { %>
+        <a href="/shop">Loja</a>
         <a href="/orders">Pedidos</a>
         <a href="/admin/admin-area">Área Admin</a>
+        <% } %>
     </div>
     <div class="center">
         <h1>EcoEssence Market</h1>
     </div>
     <div class="right">
-        <!-- if logado -->
+        <% if (isAuthenticated) { %>
         <i class="fas fa-user"></i>
-        <!-- . -->
-        <a href="/login">Login</a>
+        <form id="lo" action="/logout" method="post">
+            <button type="submit">Logout</a>
+        </form
+        <% } else { %>
+           <a href="/login">Login</a>
+        <% } %>
         <i class="fas fa-shopping-cart" onclick='(window.location.href = "/cart")'></i>
     </div>
 </nav>

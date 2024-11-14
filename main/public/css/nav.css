@@ -74,6 +74,14 @@ nav .right a:hover {
     color: #3498db;
 }
 
+#lo > button {
+    position: absolute;
+    right: 6vw;
+    top: 12px;
+    border: none;
+    padding: 5px 10px;
+}
+
 /* Media section */
 @media (max-width: 768px) {
     nav {

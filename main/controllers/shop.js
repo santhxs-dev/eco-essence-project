@@ -7,7 +7,8 @@ exports.getHome = (req, res, next) => {
         title: 'EcoEssence | Home',
         nav: true,
         end: true,
-        style: 'home.css'
+        style: 'home.css',
+        isAuthenticated: req.session.isLoggedIn
     })
 }
 
@@ -19,7 +20,8 @@ exports.getShop = (req, res, next) => {
             nav: true,
             end: true,
             style: 'shop.css',
-            products: products
+            products: products,
+            isAuthenticated: req.session.isLoggedIn
         })
     }).catch(err => {
         console.log(err)
@@ -37,6 +39,7 @@ exports.getProduct = (req, res, next) => {
                 end: true,
                 style: 'product-detail.css',
                 product: product,
+                isAuthenticated: req.session.isLoggedIn
             });
         })
         .catch(err => console.log(err));
@@ -47,7 +50,8 @@ exports.getAbout = (req, res, next) => {
         title: 'EcoEssence | Sobre',
         nav: true,
         end: true,
-        style: 'about.css'
+        style: 'about.css',
+        isAuthenticated: req.session.isLoggedIn
     })
 }
 
@@ -56,7 +60,8 @@ exports.getContact = (req, res, next) => {
         title: 'EcoEssence | Contatos',
         nav: true,
         end: true,
-        style: 'contact.css'
+        style: 'contact.css',
+        isAuthenticated: req.session.isLoggedIn
     })
 }
 
@@ -79,6 +84,7 @@ exports.getCart = (req, res, next) => {
                 nav: true,
                 end: true,
                 style: 'cart.css',
+                isAuthenticated: req.session.isLoggedIn
             });
         })
         .catch(err => console.log(err));
@@ -140,7 +146,8 @@ exports.postCartDelete = (req, res, next) => {
           style: 'orders.css',
           nav: true,
           end: true,
-          orders: orders
+          orders: orders,
+          isAuthenticated: req.session.isLoggedIn
         });
       })
       .catch(err => console.log(err));
