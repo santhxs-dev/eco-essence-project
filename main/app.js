@@ -39,6 +39,7 @@ app.use((req, res, next) => {
   }
   User.findById(req.session.user._id)
     .then(user => {
+      // Esse middleware vai manter sempre esse req do user
       req.user = user;
       next();
     })

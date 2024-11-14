@@ -11,11 +11,13 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  User.findById('5bab316ce0a7c75f783cb8a8')
+  User.findById('6733b97a338988eecb343963')
     .then(user => {
       req.session.isLoggedIn = true;
       req.session.user = user;
+      console.log('User: ' + user)
       req.session.save(err => {
+        // Assim só renderiza quando estiver tudo certo
         console.log(err);
         res.redirect('/');
       });
