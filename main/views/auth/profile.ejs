@@ -2,10 +2,14 @@
 
 <%- include('../includes/nav') %>
 
-<% if (isAuthenticated) { %>
 <form action="/logout" method="post">
-    <button id="lo" type="submit">Logout</a>
-</form
-<% } %>
+    <button type="submit">Logout</button>
+</form>
+<h1><%= user.name %></h1>
+<h1><%= user.email %></h1>
+<% cartProds.forEach(prod => { %>
+    <h1><%= prod.title %></h1>
+    <% console.log(prod.productId.title) %>
+<% }) %>
 
 <%- include('../includes/end') %>

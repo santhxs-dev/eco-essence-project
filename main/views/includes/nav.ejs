@@ -15,10 +15,10 @@
     <div class="right">
         <% if (isAuthenticated) { %>
         <i class="fas fa-user" onclick="(window.location.href = '/profile')"></i>
+        <i class="fas fa-shopping-cart" onclick='(window.location.href = "/cart")'></i>
         <% } %>
         <% if (!isAuthenticated) { %>
            <a href="/login">Login</a>
         <% } %>
-        <i class="fas fa-shopping-cart" onclick='(window.location.href = "/cart")'></i>
     </div>
 </nav>

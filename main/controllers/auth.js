@@ -17,7 +17,6 @@ exports.postLogin = (req, res, next) => {
     .then(user => {
       req.session.isLoggedIn = true;
       req.session.user = user;
-      console.log('User: ' + user)
       req.session.save(err => {
         // Assim só renderiza quando estiver tudo certo
         console.log(err);
@@ -37,11 +36,18 @@ exports.postLogout = (req, res, next) => {
 // Profile Section
 
 exports.getProfile = (req, res, next) => {
-  res.render('auth/profile', {
-    title: 'EcoEssence | Perfil',
-    nav: true,
-    end: true,
-    style: 'profile.css',
-    isAuthenticated: req.session.isLoggedIn
+  req.user.populate('cart.items.productId')
+    .then(user => {
+      const cartProds = user.cart.items
+      console.log('Fetched User Products in Cart: ' + cartProds)
+      res.render('auth/profile', {
+        title: 'EcoEssence | Perfil',
+        nav: true,
+        end: true,
+        style: 'profile.css',
+        isAuthenticated: req.session.isLoggedIn,
+        user: req.user,
+        cartProds: cartProds
+      })
   })
 }
