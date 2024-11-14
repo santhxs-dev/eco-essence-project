@@ -1,8 +1,10 @@
 const User = require('../models/user');
 
+// Login section
+
 exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
-    title: "login pagina",
+    title: 'EcoEssence | Login',
     style: 'auth.css',
     nav: true,
     end: true,
@@ -31,3 +33,15 @@ exports.postLogout = (req, res, next) => {
     res.redirect('/');
   });
 };
+
+// Profile Section
+
+exports.getProfile = (req, res, next) => {
+  res.render('auth/profile', {
+    title: 'EcoEssence | Perfil',
+    nav: true,
+    end: true,
+    style: 'profile.css',
+    isAuthenticated: req.session.isLoggedIn
+  })
+}

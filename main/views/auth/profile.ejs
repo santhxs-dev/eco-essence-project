@@ -1,0 +1,11 @@
+<%- include('../includes/body') %>
+
+<%- include('../includes/nav') %>
+
+<% if (isAuthenticated) { %>
+<form action="/logout" method="post">
+    <button id="lo" type="submit">Logout</a>
+</form
+<% } %>
+
+<%- include('../includes/end') %>

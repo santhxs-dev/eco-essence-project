@@ -14,11 +14,9 @@
     </div>
     <div class="right">
         <% if (isAuthenticated) { %>
-        <i class="fas fa-user"></i>
-        <form id="lo" action="/logout" method="post">
-            <button type="submit">Logout</a>
-        </form
-        <% } else { %>
+        <i class="fas fa-user" onclick="(window.location.href = '/profile')"></i>
+        <% } %>
+        <% if (!isAuthenticated) { %>
            <a href="/login">Login</a>
         <% } %>
         <i class="fas fa-shopping-cart" onclick='(window.location.href = "/cart")'></i>

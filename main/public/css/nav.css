@@ -79,23 +79,6 @@ nav .right a:hover {
     transition: all 0.14s ease;
 }
 
-#lo > button {
-    position: absolute;
-    right: 6vw;
-    top: 9px;
-    border: none;
-    padding: 7px 12px;
-    /* border-radius: 5px; */
-    color: #3498db;
-    transition: all 0.14s ease;
-}
-
-#lo > button:hover {
-    color: white;
-    background-color: #3498db;
-    transition: all 0.14s ease;
-}
-
 /* Media section */
 @media (max-width: 768px) {
     nav {
