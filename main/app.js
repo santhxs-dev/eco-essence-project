@@ -2,21 +2,42 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 const User = require('./models/user')
 
+const MONGODB_URI = 'mongodb+srv://eo-renki:18634022@cluster0.knfm8.mongodb.net/market-project?retryWrites=true&w=majority&appName=Cluster0'
+
 const shopRouter = require('./routes/shop')
 const adminRouter = require('./routes/admin')
+const authRouter = require('./routes/auth')
 
 const app = express()
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: 'sessions'
+})
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
+app.use(
+  session({
+    secret: 'my secret',
+    resave: false,
+    saveUninitialized: false,
+    store: store
+  })
+);
+
 app.use((req, res, next) => {
-  User.findById('6733b97a338988eecb343963')
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
     .then(user => {
       req.user = user;
       next();
@@ -26,6 +47,7 @@ app.use((req, res, next) => {
 
 app.use(shopRouter)
 app.use('/admin', adminRouter)
+app.use(authRouter)
 
 app.use((req, res, next) => {
   res.status(404).render('404', {
@@ -37,7 +59,7 @@ app.use((req, res, next) => {
 })
 
 mongoose
-  .connect('mongodb+srv://eo-renki:18634022@cluster0.knfm8.mongodb.net/market-project?retryWrites=true&w=majority&appName=Cluster0')
+  .connect(MONGODB_URI)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
