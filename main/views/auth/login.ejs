@@ -3,6 +3,9 @@
 <%- include('../includes/nav') %>
 
  <form action="/login" method="POST">
+    <% if (errorMessage) { %>
+        <div class="user-message user-message--error"><%= errorMessage %></div>
+    <% } %>
     <h2>Preencha os campos para fazer login:</h2>
     <label for="email">E-Mail</label>
     <input type="email" name="email" id="email" required>

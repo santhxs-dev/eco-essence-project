@@ -5,6 +5,9 @@
     <div class="error-message"><%= errorMessage %></div>
 <% } %>
 <form action="/signup" method="POST">
+    <% if (errorMessage) { %>
+        <div class="user-message user-message--error"><%= errorMessage %></div>
+    <% } %>
     <div>
         <label for="email">E-Mail</label>
         <input type="email" name="email" id="email">
@@ -17,6 +20,7 @@
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" name="confirmPassword" id="confirmPassword">
     </div>
+    
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <button class="btn" type="submit">Signup</button>
 </form>
