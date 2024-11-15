@@ -9,6 +9,7 @@
     <h2>- <%= product.description %></h2>
     
     <form action="/cart" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button class="btn" type="submit">Adicionar ao carrinho</button>
         <input type="hidden" name="productId" value="<%= product._id %>">
     </form>

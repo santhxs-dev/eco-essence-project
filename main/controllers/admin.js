@@ -6,7 +6,6 @@ exports.getAdminArea = (req, res, next) => {
     nav: true,
     end: false,
     style: 'admin-area.css',
-    isAuthenticated: req.session.isLoggedIn
   })
 }
 
@@ -17,7 +16,6 @@ exports.getAddProduct = (req, res, next) => {
     end: false,
     style: 'add-edit-product.css',
     editing: false,
-    isAuthenticated: req.session.isLoggedIn
   })
 }
 
@@ -29,7 +27,6 @@ exports.getAdminProducts = (req, res, next) => {
       end: false,
       style: 'admin-products.css',
       products: products,
-      isAuthenticated: req.session.isLoggedIn
     })
   }).catch(err => {
     console.log(err)
@@ -54,7 +51,6 @@ exports.getEditProduct = (req, res, next) => {
         nav: true,
         end: true,
         style: 'add-edit-product.css',
-        isAuthenticated: req.session.isLoggedIn
       });
     })
     .catch(err => console.log(err));
