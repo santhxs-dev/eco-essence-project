@@ -28,8 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
-
-
 app.use(
   session({
     secret: 'my secret',
@@ -75,20 +73,7 @@ app.use((req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then(result => {
-    User.findOne().then(user => {
-      if (!user) {
-        const user = new User({
-          name: 'Jxs',
-          email: 'jxss@test.com',
-          cart: {
-            items: []
-          }
-        });
-        user.save();
-      }
-      console.log("Connected to MongoDB!");
       app.listen(3000);
     }).catch(err => {
-      console.log("Erro to connect on MongoDB:", err);
+      console.log(err);
     });
-  })

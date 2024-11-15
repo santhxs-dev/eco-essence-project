@@ -23,7 +23,6 @@ exports.getProfile = (req, res, next) => {
         nav: true,
         end: true,
         style: 'profile.css',
-        isAuthenticated: req.session.isLoggedIn,
         user: req.user,
         cartProds: cartProds
       })
@@ -42,6 +41,7 @@ exports.getSignup = (req, res, next) => {
     style: 'auth.css',
     nav: true,
     end: true,
+    errorMessage: message
   }) 
 }
 
@@ -57,6 +57,7 @@ exports.getLogin = (req, res, next) => {
     style: 'auth.css',
     nav: true,
     end: true,
+    errorMessage: message
   });
 };
 
