@@ -2,14 +2,30 @@
 
 <%- include('../includes/nav') %>
 
-<form action="/logout" method="post">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <button type="submit">Logout</button>
-</form>
-<h1><%= user.name %></h1>
-<h1><%= user.email %></h1>
-<% cartProds.forEach(prod => { %>
-0    <h1><%= prod.productId.title %></h1>
-<% }) %>
+<main class="container">
+    <section class="user-info">
+        <h1 class="user-name"><%= user.name %></h1>
+        <p class="user-email"><%= user.email %></p>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit">Sair da conta</button>
+        </form>
+    </section>
+
+    <section class="cart-products">
+        <h2>Seu carrinho:</h2>
+        <% if (cartProds.length) { %>
+            <ul class="product-list">
+                <% cartProds.forEach(prod => { %>
+                    <li class="product-item">
+                        <h3><%= prod.productId.title %> - (<%= prod.quantity %>)</h3>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>Vazio! Pode começar sua compra na aba 'Loja'</p>
+        <% } %>
+    </section>
+</main>
 
 <%- include('../includes/end') %>
