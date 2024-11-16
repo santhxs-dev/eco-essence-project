@@ -1,17 +1,17 @@
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
-
 const User = require('../models/user');
+// const nodemailer = require('nodemailer');
+// const sendgridTransport = require('nodemailer-sendgrid-transport');
 
-const transporter = nodemailer.createTransport(
-  sendgridTransport({
-    auth: {
-      api_key:
-        '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'
-    }
-  })
-);
+
+// const transporter = nodemailer.createTransport(
+//   sendgridTransport({
+//     auth: {
+//       api_key:
+//         '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'
+//     }
+//   })
+// );
 
 exports.getProfile = (req, res, next) => {
   req.user.populate('cart.items.productId')
@@ -88,12 +88,12 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login');
-          return transporter.sendMail({
-            to: email,
-            from: 'shop@node-complete.com',
-            subject: 'Signup succeeded!',
-            html: '<h1>You successfully signed up!</h1>'
-          });
+          // return transporter.sendMail({
+          //   to: email,
+          //   from: 'shop@node-complete.com',
+          //   subject: 'Signup succeeded!',
+          //   html: '<h1>You successfully signed up!</h1>'
+          // });
         })
         .catch(err => {
           console.log(err);
