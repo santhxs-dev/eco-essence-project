@@ -1,9 +1,8 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
+
 // const sendgridTransport = require('nodemailer-sendgrid-transport');
-
-
 // const transporter = nodemailer.createTransport(
 //   sendgridTransport({
 //     auth: {
@@ -12,6 +11,14 @@ const User = require('../models/user');
 //     }
 //   })
 // );
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'joseluizsff@gmail.com',
+    pass: 'xmlv nwkj eafv arjj' // Use App Password se necessário.
+  }
+});
 
 exports.getProfile = (req, res, next) => {
   req.user.populate('cart.items.productId')
@@ -104,12 +111,12 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login');
-          // return transporter.sendMail({
-          //   to: email,
-          //   from: 'shop@node-complete.com',
-          //   subject: 'Signup succeeded!',
-          //   html: '<h1>You successfully signed up!</h1>'
-          // });
+          return transporter.sendMail({
+            to: email,
+            from: 'joseluizsff@gmail.com',
+            subject: 'Cadastro realizado',
+            text: 'Sua conta no EcoEssence Market foi realizada com sucesso!'
+          })
         })
         .catch(err => {
           console.log(err);
@@ -135,6 +142,12 @@ exports.postLogin = (req, res, next) => {
           if (doMatch) {
             req.session.isLoggedIn = true;
             req.session.user = user;
+            transporter.sendMail({
+              to: email,
+              from: 'joseluizsff@gmail.com',
+              subject: 'Login realizado',
+              text: 'Seu login na EcoEssence Market foi feita com sucesso!'
+            })
             return req.session.save(err => {
               console.log(err);
               res.redirect('/');
