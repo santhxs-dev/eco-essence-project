@@ -1,3 +1,5 @@
+const crypto = require('crypto')
+
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
@@ -16,7 +18,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'joseluizsff@gmail.com',
-    pass: 'xmlv nwkj eafv arjj' // Use App Password se necessário.
+    pass: 'xmlv nwkj eafv arjj'
   }
 });
 
@@ -171,3 +173,39 @@ exports.postLogout = (req, res, next) => {
   });
 };
 
+exports.postReset = (req, res, next) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err)
+      return res.redirect('/')
+    }
+    const token = buffer.toString('hex')
+    User.findOne({email: req.body.email})
+      .then(user => {
+        if (!user) {
+          req.flash('error', 'Nenhuma conta encontrada com este E-Mail!')
+          return res.redirect('/reset')
+        }
+        user.resetToken = token
+        user.resetTokenExpiration = Date.now() + 3600000
+        return user.save()
+      })
+      .then(result => {
+        res.redirect('/')
+        // paramo aq, q criamos o token pra enviar esse email
+        transporter.sendMail({
+          to: req.body.email,
+          from: 'joseluizsff@gmail.com',
+          subject: 'Redefinir senha EcoEssence',
+          html: `
+            <p>Você solicitou redifinir sua senha em nosso site:</p>
+            <a href="https://seusite.com/reset/${token}" style="color: blue; text-decoration: underline;">Clique aqui</a>
+            <p>Se você não fez essa solicitação, ignore este e-mail.</p>
+          `
+        });
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
+}

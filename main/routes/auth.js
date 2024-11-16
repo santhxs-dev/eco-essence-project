@@ -12,5 +12,6 @@ router.get('/reset', controller.getReset)
 router.post('/signup', controller.postSignup)
 router.post('/login', controller.postLogin)
 router.post('/logout', controller.postLogout)
+router.post('/reset', controller.postReset)
 
 module.exports = router
