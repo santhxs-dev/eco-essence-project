@@ -40,3 +40,8 @@ form > button {
 form > button:hover {
     opacity: 0.8;
 }
+
+.error {
+    color: red;
+    font-weight: 700;
+}

@@ -1,12 +1,9 @@
 <%- include('../includes/body.ejs') %>
 <%- include('../includes/nav.ejs') %>
 
-<% if (errorMessage) { %>
-    <div class="error-message"><%= errorMessage %></div>
-<% } %>
 <form action="/signup" method="POST">
     <% if (errorMessage) { %>
-    <div class="user-message user-message--error"><%= errorMessage %></div>
+    <div class="error"><%= errorMessage %></div>
     <% } %>
     <h2>Preencha os campos para criar sua conta:</h2>
     <label for="username">Nome de Usuário</label>
