@@ -68,7 +68,7 @@ exports.getReset = (req, res, next) => {
   } else {
     message = null;
   }
-  res.render('auth/login', {
+  res.render('auth/reset', {
     title: 'Login | Resetar senha',
     style: 'auth.css',
     nav: true,

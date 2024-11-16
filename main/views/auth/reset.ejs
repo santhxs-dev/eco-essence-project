@@ -2,7 +2,7 @@
 
 <%- include('../includes/nav') %>
 
- <form action="/reset" method="POST">
+ <form action="/reset-password" method="POST">
     <% if (errorMessage) { %>
         <div class="error"><%= errorMessage %></div>
     <% } %>
@@ -11,7 +11,7 @@
     <input type="email" name="email" id="email" required>
 
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <button type="submit">resetar/button>
+    <button type="submit">Confirmar</button>
 </form>
 
 <%- include('../includes/end.ejs') %>
