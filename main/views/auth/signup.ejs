@@ -6,20 +6,16 @@
 <% } %>
 <form action="/signup" method="POST">
     <% if (errorMessage) { %>
-        <div class="user-message user-message--error"><%= errorMessage %></div>
+    <div class="user-message user-message--error"><%= errorMessage %></div>
     <% } %>
-    <div>
-        <label for="email">E-Mail</label>
-        <input type="email" name="email" id="email">
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <div>
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="confirmPassword">
-    </div>
+    <label for="username">Nome de Usuário</label>
+    <input type="text" name="username" id="username" required>
+    <label for="email">E-Mail</label>
+    <input type="email" name="email" id="email">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+    <!-- <label for="confirmPassword">Confirm Password</label>
+    <input type="password" name="confirmPassword" id="confirmPassword"> -->
     
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <button class="btn" type="submit">Signup</button>

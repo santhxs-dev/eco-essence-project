@@ -62,15 +62,16 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
+  const name = req.body.username
   const email = req.body.email;
   const password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
+  // const confirmPassword = req.body.confirmPassword;
   User.findOne({ email: email })
     .then(userDoc => {
       if (userDoc) {
         req.flash(
           'error',
-          'E-Mail exists already, please pick a different one.'
+          'E-Mail já existente, por favor, utilize outro.'
         );
         return res.redirect('/signup');
       }
@@ -78,6 +79,7 @@ exports.postSignup = (req, res, next) => {
         .hash(password, 12)
         .then(hashedPassword => {
           const user = new User({
+            name: name,
             email: email,
             password: hashedPassword,
             cart: { items: [] }
@@ -108,7 +110,7 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
-        req.flash('error', 'Invalid email or password.');
+        req.flash('error', 'E-Mail ou senha inválidos.');
         return res.redirect('/login');
       }
       bcrypt
@@ -122,7 +124,7 @@ exports.postLogin = (req, res, next) => {
               res.redirect('/');
             });
           }
-          req.flash('error', 'Invalid email or password.');
+          req.flash('error', 'E-Mail ou senha inválidos.');
           res.redirect('/login');
         })
         .catch(err => {
