@@ -61,6 +61,22 @@ exports.getLogin = (req, res, next) => {
   });
 };
 
+exports.getReset = (req, res, next) => {
+  let message = req.flash('error');
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+  res.render('auth/login', {
+    title: 'Login | Resetar senha',
+    style: 'auth.css',
+    nav: true,
+    end: true,
+    errorMessage: message
+  });
+}
+
 exports.postSignup = (req, res, next) => {
   const name = req.body.username
   const email = req.body.email;

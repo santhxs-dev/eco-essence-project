@@ -73,6 +73,7 @@ app.use((req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then(result => {
+      console.log('Connected to MongoDB')
       app.listen(3000);
     }).catch(err => {
       console.log(err);
