@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const MONGODB_URI = process.env.MONGODB_URI
+
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -17,7 +19,7 @@ const authRouter = require('./routes/auth')
 
 const app = express()
 const store = new MongoDBStore({
-  uri: process.env.MONGODB_URI,
+  uri: MONGODB_URI,
   collection: 'sessions'
 })
 
@@ -71,10 +73,10 @@ app.use((req, res, next) => {
 })
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(MONGODB_URI)
   .then(result => {
     console.log('Connected to MongoDB')
     app.listen(3000);
-      }).catch(err => {
-        console.log(err);
-      });
+  }).catch(err => {
+      console.log(err);
+    });

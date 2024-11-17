@@ -1,24 +1,17 @@
 const crypto = require('crypto')
 
+const MAILER_MAIL = process.env.MAILER_MAIL
+const MAILER_PASS = process.env.MAILER_PASS
+
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
 
-// const sendgridTransport = require('nodemailer-sendgrid-transport');
-// const transporter = nodemailer.createTransport(
-//   sendgridTransport({
-//     auth: {
-//       api_key:
-//         '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'
-//     }
-//   })
-// );
-
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'joseluizsff@gmail.com',
-    pass: 'xmlv nwkj eafv arjj'
+    user: MAILER_MAIL,
+    pass: MAILER_PASS
   }
 });
 
@@ -192,21 +185,13 @@ exports.postReset = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/')
-        // PARAMO AQ TENTANTO RESOLVER ESSA BST
         const html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Entre no seguinte link em seu navegador:</p><p>${process.env.CODESPACE_URL}/reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
         transporter.sendMail({
           to: req.body.email,
           from: 'joseluizsff@gmail.com',
           subject: 'Redefinir senha EcoEssence',
           html: html
-        }, (error, info) => {
-          if (error) {
-            console.error('Erro ao enviar o e-mail:', error);
-          } else {
-            console.log('E-mail enviado:', info.response);
-          }
-        });
-
+        })
       })
       .catch(err => {
         console.log(err)
