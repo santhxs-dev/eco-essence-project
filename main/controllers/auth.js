@@ -35,7 +35,7 @@ exports.getProfile = (req, res, next) => {
         user: req.user,
         cartProds: cartProds
       })
-  })
+    })
 }
 
 exports.getSignup = (req, res, next) => {
@@ -51,7 +51,7 @@ exports.getSignup = (req, res, next) => {
     nav: true,
     end: true,
     errorMessage: message
-  }) 
+  })
 }
 
 exports.getLogin = (req, res, next) => {
@@ -180,7 +180,7 @@ exports.postReset = (req, res, next) => {
       return res.redirect('/')
     }
     const token = buffer.toString('hex')
-    User.findOne({email: req.body.email})
+    User.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
           req.flash('error', 'Nenhuma conta encontrada com este E-Mail!')
@@ -192,17 +192,23 @@ exports.postReset = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/')
-        // paramo aq, q criamos o token pra enviar esse email
+        // PARAMO AQ TENTANTO RESOLVER ESSA BST
+        const html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Copie e cole este link no navegador:</p><p>http://localhost:3000/reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
+
+
         transporter.sendMail({
           to: req.body.email,
           from: 'joseluizsff@gmail.com',
           subject: 'Redefinir senha EcoEssence',
-          html: `
-            <p>Você solicitou redifinir sua senha em nosso site:</p>
-            <a href="https://seusite.com/reset/${token}" style="color: blue; text-decoration: underline;">Clique aqui</a>
-            <p>Se você não fez essa solicitação, ignore este e-mail.</p>
-          `
+          html: `<p>barigadam</p>`
+        }, (error, info) => {
+          if (error) {
+            console.error('Erro ao enviar o e-mail:', error);
+          } else {
+            console.log('E-mail enviado:', info.response);
+          }
         });
+
       })
       .catch(err => {
         console.log(err)
