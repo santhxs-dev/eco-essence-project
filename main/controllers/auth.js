@@ -79,6 +79,30 @@ exports.getReset = (req, res, next) => {
   });
 }
 
+exports.getNewPassword = (req, res, next) => {
+  const token = req.params.token
+  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+    .then(user => {
+      let message = req.flash('error');
+      if (message.length > 0) {
+        message = message[0];
+      } else {
+        message = null;
+      }
+      res.render('auth/new-password', {
+        title: 'Resetar senha | Nova senha',
+        style: 'auth.css',
+        nav: true,
+        end: true,
+        errorMessage: message,
+        userId: user._id.toString()
+      });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 exports.postSignup = (req, res, next) => {
   const name = req.body.username
   const email = req.body.email;
@@ -185,8 +209,6 @@ exports.postReset = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/')
-
-        // PARAMOS AQ, DPS DE MODIFICAR O NOSSO MAILER BOT, E RECEBER O EMAIL TA TUDO CERTO
         const html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Entre no seguinte link em seu navegador:</p><p>${process.env.CODESPACE_URL}/reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
         transporter.sendMail({
           to: req.body.email,
