@@ -185,6 +185,8 @@ exports.postReset = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/')
+
+        // PARAMOS AQ, DPS DE MODIFICAR O NOSSO MAILER BOT, E RECEBER O EMAIL TA TUDO CERTO
         const html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Entre no seguinte link em seu navegador:</p><p>${process.env.CODESPACE_URL}/reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
         transporter.sendMail({
           to: req.body.email,
