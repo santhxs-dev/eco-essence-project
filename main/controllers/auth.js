@@ -193,14 +193,12 @@ exports.postReset = (req, res, next) => {
       .then(result => {
         res.redirect('/')
         // PARAMO AQ TENTANTO RESOLVER ESSA BST
-        const html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Copie e cole este link no navegador:</p><p>http://localhost:3000/reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
-
-
+        const html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Entre no seguinte link em seu navegador:</p><p>${process.env.CODESPACE_URL}/reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
         transporter.sendMail({
           to: req.body.email,
           from: 'joseluizsff@gmail.com',
           subject: 'Redefinir senha EcoEssence',
-          html: `<p>barigadam</p>`
+          html: html
         }, (error, info) => {
           if (error) {
             console.error('Erro ao enviar o e-mail:', error);

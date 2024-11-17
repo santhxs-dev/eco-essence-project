@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -9,15 +11,13 @@ const flash = require('connect-flash')
 
 const User = require('./models/user')
 
-const MONGODB_URI = 'mongodb+srv://eo-renki:18634022@cluster0.knfm8.mongodb.net/market-project?retryWrites=true&w=majority&appName=Cluster0'
-
 const shopRouter = require('./routes/shop')
 const adminRouter = require('./routes/admin')
 const authRouter = require('./routes/auth')
 
 const app = express()
 const store = new MongoDBStore({
-  uri: MONGODB_URI,
+  uri: process.env.MONGODB_URI,
   collection: 'sessions'
 })
 
@@ -71,10 +71,10 @@ app.use((req, res, next) => {
 })
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(process.env.MONGODB_URI)
   .then(result => {
-      console.log('Connected to MongoDB')
-      app.listen(3000);
-    }).catch(err => {
-      console.log(err);
-    });
+    console.log('Connected to MongoDB')
+    app.listen(3000);
+      }).catch(err => {
+        console.log(err);
+      });
