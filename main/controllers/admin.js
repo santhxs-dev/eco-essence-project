@@ -19,8 +19,10 @@ exports.getAddProduct = (req, res, next) => {
   })
 }
 
+// fazer um middleware proprio pro user ver seus prods
 exports.getAdminProducts = (req, res, next) => {
-  Product.find().then(products => {
+  Product.find({userId: req.user._id})
+    .then(products => {
     res.render('admin/products', {
       title: 'Admin | Produtos',
       nav: true,
@@ -61,11 +63,13 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
+  const userId = req.user._id
   const product = new Product({
     title: title,
     price: price,
     description: description,
     imageUrl: imageUrl,
+    userId: userId
   });
   product
     .save()
