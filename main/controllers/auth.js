@@ -82,7 +82,7 @@ exports.getReset = (req, res, next) => {
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token
 
-  // Removed resetTokenExpiration and resetToken
+  // Removed resetTokenExpiration
   User.findOne({ resetToken: token })
     .then(user => {
       let message = req.flash('error');
@@ -161,7 +161,7 @@ exports.postLogin = (req, res, next) => {
             req.session.user = user;
             transporter.sendMail({
               to: email,
-              from: 'joseluizsff@gmail.com',
+              from: MAILER_MAIL,
               subject: 'Login realizado',
               text: 'Seu login na EcoEssence Market foi feita com sucesso!'
             })
@@ -210,7 +210,7 @@ exports.postReset = (req, res, next) => {
         let html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Entre no seguinte link em seu navegador:</p><p>${process.env.CODESPACE_URL}reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
         transporter.sendMail({
           to: req.body.email,
-          from: 'joseluizsff@gmail.com',
+          from: MAILER_MAIL,
           subject: 'Redefinir senha EcoEssence',
           html: html
         })
