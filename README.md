@@ -46,10 +46,3 @@ Entre outros.
    ```bash
    yarn start
    ```
-
----
-
-#### **Contribuição**  
-Sinta-se à vontade para abrir issues ou enviar pull requests com sugestões ou melhorias.  
-
----
