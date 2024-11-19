@@ -29,17 +29,18 @@ exports.getShop = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId
     Product.findById(prodId)
-        .then(product => {
-            // console.log('Fetched product: ' + product)
-            res.render('shop/product-detail', {
-                title: 'Loja | Detalhes do Produto',
-                nav: true,
-                end: true,
-                style: 'product-detail.css',
-                product: product,
-            });
-        })
-        .catch(err => console.log(err));
+      .populate('userId', 'name') // Popula o campo 'userId' com o atributo 'name' do usuário
+      .then(product => {
+        console.log('Fetched product with the user: ' + product)
+        res.render('shop/product-detail', {
+          title: 'Loja | Detalhes do Produto',
+          nav: true,
+          end: true,
+          style: 'product-detail.css',
+          product: product,
+        });
+      })
+      .catch(err => console.log(err));
 }
 
 exports.getAbout = (req, res, next) => {

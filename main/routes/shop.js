@@ -5,7 +5,7 @@ const isAuth = require('../middlewares/is-auth');
 const router = express.Router()
 
 router.get('/', controller.getHome)
-router.get('/shop', isAuth, controller.getShop)
+router.get('/shop', controller.getShop)
 router.get('/shop/:productId', isAuth, controller.getProduct)
 router.get('/about', controller.getAbout)
 router.get('/contact', controller.getContact)
