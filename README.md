@@ -1,7 +1,7 @@
 ### **EcoEssence Market**  
 
 #### **Descrição do Projeto**  
-Um projeto feito com algumas ferramentas, com base no que aprendi em 2 meses estudando backend
+Um projeto feito com algumas ferramentas, com base no que aprendi em 1 mês e meio estudando backend
 
 ---
 
@@ -37,16 +37,8 @@ Entre outros.
    yarn install
    ```
 
-3. Crie um arquivo `.env` com as seguintes variáveis:  
-   ```plaintext
-   DB_HOST=
-   DB_USER=
-   DB_PASS=
-   SECRET_KEY=
-   EMAIL_HOST=
-   EMAIL_PASS=
-   ```
-4. Inicie o servidor (nodemon):  
+3. Crie o arquivo `.env` e preencha as variáveis demonstradas em `.env.example`
+5. Inicie o servidor (nodemon):  
    ```bash
    npm start
    ```  
