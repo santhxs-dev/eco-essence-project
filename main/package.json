@@ -9,8 +9,7 @@
     "start-server": "node app.js",
     "ngrok": "ngrok http 3000"
   },
-  "author": "Renki Dev",
-  "license": "MIT",
+  "author": "theJxss",
   "devDependencies": {
     "nodemon": "^3.1.7"
   },
