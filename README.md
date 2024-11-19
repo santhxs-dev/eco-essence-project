@@ -1,7 +1,7 @@
 ### **EcoEssence Market**  
 
 #### **Descrição do Projeto**  
-O **EcoEssence Market** é um sistema backend para uma loja virtual, projetado para gerenciar produtos, usuários e carrinhos de compras com funcionalidades avançadas. O projeto foi desenvolvido com foco em aprendizado e aplicação de boas práticas em desenvolvimento backend.
+Um projeto feito com algumas ferramentas, com base no que aprendi em 2 meses estudando backend
 
 ---
 
