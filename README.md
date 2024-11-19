@@ -26,7 +26,7 @@ Entre outros.
 #### **Como Configurar o Projeto**  
 1. Clone este repositório:  
    ```bash
-   git clone <url_do_repositorio>
+   git clone https://github.com/theJxss/eco-essence-project.git
    ```
 2. Instale as dependências:  
    ```bash
