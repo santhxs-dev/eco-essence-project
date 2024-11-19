@@ -19,7 +19,7 @@ exports.getProfile = (req, res, next) => {
   req.user.populate('cart.items.productId')
     .then(user => {
       const cartProds = user.cart.items
-      console.log('Fetched User Products in Cart: ' + cartProds)
+      // console.log('Fetched User Products in Cart: ' + cartProds)
       res.render('auth/profile', {
         title: 'EcoEssence | Perfil',
         nav: true,
@@ -91,8 +91,6 @@ exports.getNewPassword = (req, res, next) => {
       } else {
         message = null;
       }
-      console.log('94', user._id)
-      console.log('95', user._id.toString())
       res.render('auth/new-password', {  
         title: 'Resetar senha | Nova senha',
         style: 'auth.css',
@@ -232,14 +230,10 @@ exports.postNewPassword = (req, res, next) => {
   // Removed resetTokenExpiration and resetToken
   User.findOne({_id: userId})
     .then(user => {
-      // console.log('user: ', user)
-      // console.log('password: ', user.password)
       resetUser = user
       return bcrypt.hash(newPassword, 12)
     })
     .then(hashedPassword => {
-      // console.log('hashedPassword: ', hashedPassword)
-      // console.log('resetUser: ', resetUser)
       resetUser.password = hashedPassword
       return resetUser.save()
     })

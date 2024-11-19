@@ -13,7 +13,7 @@ exports.getHome = (req, res, next) => {
 
 exports.getShop = (req, res, next) => {
     Product.find().then(products => {
-        console.log('Products: ' + products)
+        // console.log('Products: ' + products)
         res.render('shop/shop', {
             title: 'EcoEssence | Loja',
             nav: true,
@@ -30,7 +30,7 @@ exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId
     Product.findById(prodId)
         .then(product => {
-            console.log('Fetched product: ' + product)
+            // console.log('Fetched product: ' + product)
             res.render('shop/product-detail', {
                 title: 'Loja | Detalhes do Produto',
                 nav: true,
@@ -92,7 +92,6 @@ exports.postCart = (req, res, next) => {
             return req.user.addToCart(product);
         })
         .then(result => {
-            console.log(result);
             res.redirect('/cart');
         });
 };
