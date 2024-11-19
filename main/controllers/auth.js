@@ -81,7 +81,9 @@ exports.getReset = (req, res, next) => {
 
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token
-  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+
+  // Removed resetTokenExpiration and resetToken
+  User.findOne({ resetToken: token })
     .then(user => {
       let message = req.flash('error');
       if (message.length > 0) {
@@ -89,12 +91,15 @@ exports.getNewPassword = (req, res, next) => {
       } else {
         message = null;
       }
-      res.render('auth/new-password', {
+      console.log('94', user._id)
+      console.log('95', user._id.toString())
+      res.render('auth/new-password', {  
         title: 'Resetar senha | Nova senha',
         style: 'auth.css',
         nav: true,
         end: true,
         errorMessage: message,
+        // userId: user._id,
         userId: user._id.toString(),
         passwordToken: token
       });
@@ -131,12 +136,6 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login');
-          return transporter.sendMail({
-            to: email,
-            from: 'joseluizsff@gmail.com',
-            subject: 'Cadastro realizado',
-            text: 'Sua conta no EcoEssence Market foi realizada com sucesso!'
-          })
         })
         .catch(err => {
           console.log(err);
@@ -210,7 +209,7 @@ exports.postReset = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/')
-        const html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Entre no seguinte link em seu navegador:</p><p>${process.env.CODESPACE_URL}reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
+        let html = `<p>Olá,</p><p>Você solicitou redefinir sua senha no site EcoEssence.</p><p>Entre no seguinte link em seu navegador:</p><p>${process.env.CODESPACE_URL}reset/${token}</p><p>Se você não fez esta solicitação, ignore este e-mail.</p>`
         transporter.sendMail({
           to: req.body.email,
           from: 'joseluizsff@gmail.com',
@@ -230,19 +229,27 @@ exports.postNewPassword = (req, res, next) => {
   const passwordToken = req.body.passwordToken
   let resetUser
   
-  User.findOne({resetToken: passwordToken, resetTokenExpiration: {$gt: Date.now()}, _id: userId})
+  // Removed resetTokenExpiration and resetToken
+  User.findOne({_id: userId})
     .then(user => {
+      // console.log('user: ', user)
+      // console.log('password: ', user.password)
       resetUser = user
       return bcrypt.hash(newPassword, 12)
     })
     .then(hashedPassword => {
+      // console.log('hashedPassword: ', hashedPassword)
+      // console.log('resetUser: ', resetUser)
       resetUser.password = hashedPassword
+      return resetUser.save()
+    })
+    .then(result => {
       resetUser.resetToken = undefined
       resetUser.resetTokenExpiration = undefined
       return resetUser.save()
     })
-    .then(result => {
-      res.redirect('/login')
+    .then(savedUser => {
+      return res.redirect('/login')
     })
     .catch(err => {
       console.log(err)
